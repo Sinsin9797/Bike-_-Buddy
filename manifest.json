@@ -1,0 +1,10 @@
+
+{
+  "name": "Bike Buddy",
+  "short_name": "BikeBuddy",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "description": "Cycling assistant for Netherlands",
+  "icons": []
+}

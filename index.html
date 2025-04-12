@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Bike Buddy</title>
+    <link rel="manifest" href="manifest.json" />
+    <script src="scripts/app.js" defer></script>
+</head>
+<body>
+    <button onclick="toggleDarkMode()">Dark Mode</button>
+    <button onclick="toggleLanguage()">NL / EN</button>
+    <h1 id="title">Live Cycling Map</h1>
+    <div id="map" style="width:100%;height:300px;background:#ccc;">Map Here</div>
+    <h2 id="weatherTitle">Weather Alerts</h2>
+    <p id="weather">Loading...</p>
+    <h2 id="repairTitle">Nearby Repair Stations</h2>
+    <ul id="stations"></ul>
+    <footer>Made for Netherlands Cyclists</footer>
+</body>
+</html>
