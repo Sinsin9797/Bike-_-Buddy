@@ -1,0 +1,16 @@
+
+{
+  "name": "Bike Buddy",
+  "short_name": "BikeBuddy",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "description": "Cycling Assistant App for Netherlands",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

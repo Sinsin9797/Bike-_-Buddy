@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="title">Bike Buddy</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <header>
+    <h1 data-i18n="title">Bike Buddy</h1>
+    <button id="toggleMode" data-i18n="toggleMode">Dark Mode</button>
+    <button id="toggleLang">NL / EN</button>
+  </header>
+  <main>
+    <section id="mapSection">
+      <h2 data-i18n="cyclingMap">Live Cycling Map</h2>
+      <div id="map"></div>
+    </section>
+    <section id="weather">
+      <h2 data-i18n="weatherAlerts">Weather Alerts</h2>
+      <p id="weatherInfo">Loading...</p>
+    </section>
+    <section id="repair">
+      <h2 data-i18n="nearbyRepairs">Nearby Repair Stations</h2>
+      <ul>
+        <li>CycleFix – 300m away</li>
+        <li>BikeDoctor – 500m away</li>
+        <li>WheelCare – 750m away</li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    <p data-i18n="footer">Made for Netherlands Cyclists</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
