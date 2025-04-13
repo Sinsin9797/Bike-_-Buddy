@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bike Buddy</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f0f0f0;
+      transition: background 0.4s, color 0.4s;
+    }
+    header {
+      background: #4CAF50;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      padding: 1rem;
+      animation: fadeIn 1s ease;
+    }
+    button, select {
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+    #map {
+      height: 300px;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #ddd;
+    }
+    .dark {
+      background: #222;
+      color: #eee;
+    }
+    .dark header, .dark footer {
+      background: #111;
+      color: #fff;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bike Buddy - Netherlands</h1>
+    <button onclick="toggleDark()">Dark Mode</button>
+    <select onchange="switchLang(this.value)">
+      <option value="en">EN</option>
+      <option value="nl">NL</option>
+    </select>
+  </header>
+  <main>
+    <h2 id="title">Live Cycling Map</h2>
+    <div id="map"></div>
+    <h2 id="weatherTitle">Weather Alerts</h2>
+    <p id="weather">Loading...</p>
+    <h2 id="repairTitle">Nearby Repair Stations</h2>
+    <ul id="repairList"></ul>
+  </main>
+  <footer>
+    &copy; 2025 Bike Buddy
+  </footer>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const translations = {
+      en: {
+        title: "Live Cycling Map",
+        weatherTitle: "Weather Alerts",
+        repairTitle: "Nearby Repair Stations"
+      },
+      nl: {
+        title: "Live Fietskaart",
+        weatherTitle: "Weeralarmen",
+        repairTitle: "Dichtstbijzijnde Reparatiestations"
+      }
+    };
+
+    function toggleDark() {
+      document.body.classList.toggle("dark");
+    }
+
+    function switchLang(lang) {
+      document.getElementById("title").innerText = translations[lang].title;
+      document.getElementById("weatherTitle").innerText = translations[lang].weatherTitle;
+      document.getElementById("repairTitle").innerText = translations[lang].repairTitle;
+    }
+
+    const map = L.map('map').setView([52.3676, 4.9041], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    const repairs = [
+      ["CycleFix", 52.369, 4.901],
+      ["BikeDoctor", 52.365, 4.91],
+      ["RepairHub", 52.372, 4.897]
+    ];
+
+    const list = document.getElementById("repairList");
+    repairs.forEach(([name, lat, lon]) => {
+      L.marker([lat, lon]).addTo(map).bindPopup(name);
+      const li = document.createElement("li");
+      li.innerText = name;
+      list.appendChild(li);
+    });
+
+    const apiKey = "4cdf82d3b77d1434acb38b73a267e428";
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=Amsterdam,nl&appid=${apiKey}&units=metric`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("weather").innerText =
+          `${data.weather[0].description}, ${data.main.temp}°C`;
+      })
+      .catch(() => {
+        document.getElementById("weather").innerText = "Weather load failed.";
+      });
+  </script>
+</body>
+</html>
